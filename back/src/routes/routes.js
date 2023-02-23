@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const Middleware = require('../middleware/middleware')
 const Usuario = require('../controller/Usuario');
 
 router.post('/usuario', Usuario.create)
@@ -26,7 +27,7 @@ router.put('/servicos/:motoristaId', Servicos.update)
 
 const Frotas = require('../controller/frotas');
 
-router.post('/frotas', Frotas.create)
+router.post('/frotas', Middleware.autenticacao, Frotas.create)
 router.get('/frotas', Frotas.read)
 router.get('/frotas/:id', Frotas.readId)
 router.put('/frotas/:id', Frotas.update)
