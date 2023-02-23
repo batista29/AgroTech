@@ -8,6 +8,7 @@ router.post('/usuario', Usuario.create)
 router.get('/usuario', Usuario.read)
 router.get('/usuario/:id', Usuario.readId)
 router.put('/usuario/:id', Usuario.update)
+router.post('/usuario/login', Usuario.login)
 
 const Motorista = require('../controller/Motorista');
 
@@ -20,8 +21,8 @@ const Servicos = require('../controller/servicos');
 
 router.post('/servicos', Servicos.create)
 router.get('/servicos', Servicos.read)
-// router.get('/servicos/:id', Servicos.readId)
-// router.put('/servicos/:id', Servicos.update)
+router.get('/servicos/:id', Servicos.readId)
+router.put('/servicos/:motoristaId', Servicos.update)
 
 const Frotas = require('../controller/frotas');
 

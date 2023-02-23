@@ -16,35 +16,33 @@ const read = async (req, res) => {
     res.status(200).json(servicos).end();
 }
 
-// const readId = async (req, res) => {
-//     let motorista = await prisma.Motorista.findUnique({
-//         where: {
-//             id: Number(req.params.id)
-//         }
-//     });
+const readId = async (req, res) => {
+    let servicos = await prisma.Servico.findUnique({
+        where: {
+            id: Number(req.params.id)
+        }
+    });
 
-//     res.status(200).json(motorista).end();
-// }
+    res.status(200).json(servicos).end();
+}
 
-// const update = async (req, res) => {
-//     let motorista = await prisma.Motorista.update({
-//         data: {
-//             nome: req.body.nome,
-//             email: req.body.email,
-//             senha: req.body.senha,
-//             cargo: req.body.cargo
-//         },
-//         where: {
-//             id: Number(req.params.id)
-//         }
-//     });
+const update = async (req, res) => {
+    let servicos = await prisma.Servico.update({
+        data: {
+            data_retorno: req.body.data_retorno,
+            descricao: req.body.descricao,
+        },
+        where: {
+            id: Number(req.params.motoristaId)
+        }
+    });
 
-//     res.status(200).json(motorista).end();
-// }
+    res.status(200).json(servicos).end();
+}
 
 module.exports = {
     create,
     read,
-    // readId,
-    // update
+    readId,
+    update
 }
