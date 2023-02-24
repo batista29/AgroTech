@@ -40,9 +40,20 @@ const update = async (req, res) => {
     res.status(200).json(servicos).end();
 }
 
+const del = async (req, res) => {
+    let servicos = await prisma.Servico.delete({
+        where: {
+            id: Number(req.params.motoristaId)
+        }
+    });
+
+    res.status(200).json(servicos).end();
+}
+
 module.exports = {
     create,
     read,
     readId,
-    update
+    update,
+    del
 }

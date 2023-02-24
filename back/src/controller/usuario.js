@@ -38,6 +38,8 @@ const login = async (req, res) => {
                 res.status(404).json(err).end()
             }
         })
+    } else {
+        res.status(404).json({"menssagem": "usuario nop"}).end()  
     }
 }
 
@@ -67,10 +69,21 @@ const update = async (req, res) => {
     res.status(200).json(usuario).end();
 }
 
+const del = async (req, res) => {
+    let usuario = await prisma.Usuario.delete({
+        where: {
+            id: Number(req.params.id)
+        }
+    });
+
+    res.status(200).json(usuario).end();
+}
+
 module.exports = {
     create,
     read,
     readId,
     update,
-    login
+    login,
+    del
 }

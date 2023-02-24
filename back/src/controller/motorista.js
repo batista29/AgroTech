@@ -42,9 +42,20 @@ const update = async (req, res) => {
     res.status(200).json(motorista).end();
 }
 
+const del = async (req, res) => {
+    let motorista = await prisma.Motorista.delete({
+        where: {
+            id: Number(req.params.id)
+        }
+    });
+
+    res.status(200).json(motorista).end();
+}
+
 module.exports = {
     create,
     read,
     readId,
-    update
+    update,
+    del
 }

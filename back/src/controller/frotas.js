@@ -41,9 +41,20 @@ const update = async (req, res) => {
     res.status(200).json(frotas).end();
 }
 
+const del = async (req, res) => {
+    let frotas = await prisma.Frota.delete({
+        where: {
+            id: Number(req.params.id)
+        }
+    });
+
+    res.status(200).json(frotas).end();
+}
+
 module.exports = {
     create,
     read,
     readId,
-    update
+    update,
+    del
 }
