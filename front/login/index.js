@@ -19,6 +19,7 @@ function login() {
 
     fetch(urlLogin, options)
         .then(res => {
+            console.log(res)
             if (res.status === 202) {
                 alert("Login successful")
                 window.location.href = '../principal'
