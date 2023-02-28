@@ -6,7 +6,7 @@ const autenticacao = (req, res,next) => {
     jwt.verify(token,process.env.KEY, (err,data)=> {
         if(err != null) res.status(404).json(err).end()
         else{
-            if(data.cargo === "Gerente"){
+            if(data.cargo === "GERENTE"){
                 next()
             
             }else {

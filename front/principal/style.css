@@ -7,23 +7,25 @@ body {
 .readSuperior,
 .readInferior {
     display: flex;
+    justify-content: space-around;
     height: 45vh;
     border: 2px solid black;
     margin-top: 1vh;
     background-color: #7465369b;
 }
 
-.readFrotas,
-.readMotoristas,
-.readServicos,
-.readManutencao {
-    width: 50%;
+.separacaoRead {
+    display: grid;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    width: 50vw;
     height: 100%;
 }
 
-.readFrotas{
-    background-color: #faf9f7;
+.readFrotas {
+    background-color: #000000;
 }
-.model{
+
+.model {
     display: none;
 }
