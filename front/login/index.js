@@ -23,13 +23,14 @@ function login() {
             if (res.status === 202) {
                 alert("Login successful")
                 window.location.href = '../principal'
-            } else {
+            } else if (res.status === 404) {
+                alert("algo deu errado, tente novamente")
+            }
+            else {
                 alert("algo deu errado, tente novamente")
             }
         })
         .then(response => console.log(response))
-        .catch(err => console.error(err));
-
 }
 
 btn.addEventListener('click', function () {
@@ -40,3 +41,7 @@ btn.addEventListener('click', function () {
         input.setAttribute('type', 'password');
     }
 });
+
+document.getElementById("btn").addEventListener("click", function (event) {
+    event.preventDefault()
+})
