@@ -4,28 +4,12 @@ body {
     background-color: #4c4223;
 }
 
-.readSuperior,
-.readInferior {
+.superior,
+.inferior {
     display: flex;
     justify-content: space-around;
     height: 45vh;
     border: 2px solid black;
     margin-top: 1vh;
     background-color: #7465369b;
-}
-
-.separacaoRead {
-    display: grid;
-    overflow-y: scroll;
-    overflow-x:hidden;
-    width: 50vw;
-    height: 100%;
-}
-
-.readFrotas {
-    background-color: #000000;
-}
-
-.model {
-    display: none;
 }

@@ -20,11 +20,11 @@ function login() {
     fetch(urlLogin, options)
         .then(res => {
             console.log(res)
-            if (res.status === 202) {
-                alert("Login successful")
-                window.location.href = '../principal'
-            } else if (res.status === 404) {
-                alert("algo deu errado, tente novamente")
+            if (res.status === 404) {
+                alert("Login deu errado")
+            } else if (res.status === 202) {
+                alert("Ok")
+                window.location.href = '../principal/index.html'
             }
             else {
                 alert("algo deu errado, tente novamente")

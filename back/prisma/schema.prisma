@@ -26,24 +26,24 @@ model Motorista {
   servicos Servico[]
 }
 
+model Frota {
+  id          Int          @id @default(autoincrement())
+  marca       String
+  modelo      String
+  placa       String
+  servicos    Servico[]
+  manutencoes Manutencao[]
+}
+
 model Servico {
   id           Int        @id @default(autoincrement())
   data_saida   DateTime
   data_retorno DateTime?
   descricao    String
-  Motorista    Motorista? @relation(fields: [motoristaId], references: [id])
   motoristaId  Int?
-  frotas       Frota[]
-}
-
-model Frota {
-  id       Int          @id @default(autoincrement())
-  marca       String
-  modelo      String
-  placa       String
-  Servico     Servico?     @relation(fields: [servicoId], references: [id])
-  servicoId   Int?
-  manutencoes Manutencao[]
+  frotaId      Int?
+  Motorista    Motorista? @relation(fields: [motoristaId], references: [id])
+  Frota Frota? @relation(fields: [frotaId], references: [id])
 }
 
 model Manutencao {
@@ -53,5 +53,5 @@ model Manutencao {
   data_inicio DateTime
   data_fim    DateTime?
   Frota       Frota?    @relation(fields: [frotaId], references: [id])
-  frotaId  Int?
+  frotaId     Int?
 }

@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="shortcut icon" href="https://seeklogo.com/images/B/boi-logo-43D7988D9C-seeklogo.com.png" type="image/x-icon">
+    <title>FROTAS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://seeklogo.com/images/B/boi-logo-43D7988D9C-seeklogo.com.png"
+        type="image/x-icon">
 </head>
-<body>
-    
+
+<body onload="carregar()">
+    <header>
+        <div>
+            <h1>AGROTECH</h1>
+        </div>
+        <div class="headerInferior">
+            <h2>Motorista</h2>
+            <h2>Serviços</h2>
+            <h2>Usuarios</h2>
+            <h2>Manutenções</h2>
+        </div>
+    </header>
+    <main>
+        <div class="readSuperior">
+            <div class="superior model">
+                <div class="readFrotas">
+                    <h3 class="marcaFrota"></h3>
+                    <h3 class="modeloFrota"></h3>
+                    <h3 class="placaFrota"></h3>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="readInferior model">
+            <div class="modal">
+                <div class="inputs">
+                    <button class="sair">X</button>
+                    <input type="text" id="marca" placeholder="digite a marca...">
+                    <input type="text" id="modelo" placeholder="digite o modelo...">
+                    <input type="text" id="placa" placeholder="digite a placa...">
+                    <button class="enviar" onclick="adicionar()">ENVIAR</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+<script src="index.js"></script>
+
 </html>
