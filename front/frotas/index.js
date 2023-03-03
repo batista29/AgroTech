@@ -30,7 +30,10 @@ function carregar() {
 }
 
 function adicionar() {
+
     var marca = document.querySelector('#marca');
+
+
     var modelo = document.querySelector('#modelo');
     var placa = document.querySelector('#placa');
 
@@ -40,26 +43,57 @@ function adicionar() {
         placa: placa.value
     }
 
-    console.log(dados)
+    if (dados.marca && dados.modelo && dados.placa !== "" || null) {
+        console.log("CERTO", dados)
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3Nzc2NDgyNCwiZXhwIjoxNjc3ODAwODI0fQ.cg8rVeYbFAQt8YW8fH2cxwZaAmMyVuL5T7-LoGUBui4'
-        },
-        body: JSON.stringify(dados)
-    };
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3Nzg0MTY0NiwiZXhwIjoxNjc3ODc3NjQ2fQ.7IZzu5AnS5khheqzXbquTPGsS-0TcyDnPCRVIfSrj3c'
+            },
+            body: JSON.stringify(dados)
+        };
 
-    fetch('http://localhost:3000/frotas', options)
-        .then(res => {
-            if (res.status === 200) {
-                alert('ADICIONADO')
-                window.location.reload()
-            } else {
-                alert("ALGO DEU ERRADO")
-            }
-        })
-        .then(response => console.log("A resposata foi: ", response))
-        .catch(err => console.error(err));
+        fetch('http://localhost:3000/frotas', options)
+            .then(res => {
+                if (res.status === 200) {
+                    alert('FROTA ADICIONADA COM SUCESSO')
+                    abrirModal2()
+                } else {
+                    alert("ALGO DEU ERRADO, FAÇA LOGIN NOVAMENTE, VERIFIQUE SE VOCÊ TEM AS PERMISSÕES NECESSÁRIAS E AVERIGUE SE OS DADOS ENTÃO ESCRITOS CORRETAMENTE.")
+                    alert("CASO NÃO FUNCIONE, LIGUE PARA A EQUIPE DE TI.")
+                }
+            })
+            .then(response => console.log("A resposata foi: ", response))
+            .catch(err => console.error(err));
+    } else {
+        console.log("Errado", dados)
+        alert("Insira os dados pedidos")
+        window.location.reload()
+    }
+}
+
+function abrirModal() {
+    let modalAparecer = document.querySelector(".readInferior");
+    modalAparecer.classList.add("modelModal")
+}
+
+function fecharModal() {
+    let modalAparecer = document.querySelector(".readInferior");
+    modalAparecer.classList.remove("modelModal")
+}
+
+function abrirModal2() {
+    let modalAparecer = document.querySelector(".confirmar");
+    modalAparecer.classList.add("modelModal2")
+}
+
+function adicionarMais() {
+    let modalAparecer = document.querySelector(".confirmar");
+    modalAparecer.classList.remove("modelModal2")
+}
+
+function recarregar() {
+    window.location.reload()
 }

@@ -17,14 +17,17 @@
             <h1>AGROTECH</h1>
         </div>
         <div class="headerInferior">
-            <h2>Motorista</h2>
-            <h2>Serviços</h2>
-            <h2>Usuarios</h2>
-            <h2>Manutenções</h2>
+            <h2><a href="../motorista/index.html">Motorista</a></h2>
+            <h2><a href="../servicos/index.html">Serviços</a></h2>
+            <h2><a href="../usuario/index.html">Usuarios</a></h2>
+            <h2><a href="../manutencoes/index.html"></a>Manutenções</h2>
+            <h2 class="pricipalTela"><a class="pricipalTelaHref" href="../principal/index.html"></a>Tela principal</h2>
         </div>
     </header>
     <main>
+       
         <div class="readSuperior">
+            <button class="entrar" onclick="abrirModal()">+</button>
             <div class="superior model">
                 <div class="readFrotas">
                     <h3 class="marcaFrota"></h3>
@@ -34,14 +37,22 @@
                 </div>
             </div>
         </div>
-        <div class="readInferior model">
+        <div class="readInferior">
             <div class="modal">
                 <div class="inputs">
-                    <button class="sair">X</button>
+                    <button class="sair" onclick="fecharModal()">X</button>
                     <input type="text" id="marca" placeholder="digite a marca...">
                     <input type="text" id="modelo" placeholder="digite o modelo...">
                     <input type="text" id="placa" placeholder="digite a placa...">
                     <button class="enviar" onclick="adicionar()">ENVIAR</button>
+                </div>
+            </div>
+        </div>
+        <div class="confirmar">
+            <div class="modalConfirmar">
+                <div class="buttonConfirmar">
+                    <button class="addMais" onclick="adicionarMais()">ADICIONAR MAIS</button>
+                    <button class="recarregar" onclick="recarregar()">SAIR</button>
                 </div>
             </div>
         </div>

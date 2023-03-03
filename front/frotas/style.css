@@ -40,20 +40,31 @@ h1 {
 .headerInferior {
     display: grid;
     text-align: center;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+a {
+    color: rgb(184, 158, 40);
+    text-decoration: none;
 }
 
 .headerInferior>h2 {
+
     padding-left: 1vh;
     padding-right: 1vh;
 }
 
-.headerInferior>h2:hover {
-    color: white;
+.headerInferior>h2:hover,
+a:hover {
+    color: rgb(255, 216, 44);
     font-size: 3vh;
     padding-left: 2vh;
     padding-right: 2vh;
     transition-duration: 0.7s;
+}
+
+.pricipalTela {
+    color: white;
 }
 
 .readFrotas:hover {
@@ -70,7 +81,7 @@ main {
 
 .readSuperior {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 70vh;
     width: 90vw;
     background-color: rgb(57, 53, 36);
@@ -81,7 +92,7 @@ main {
 }
 
 .readFrotas {
-    margin-top: 4vh;
+    margin: 7vh;
 }
 
 .model {
@@ -89,25 +100,9 @@ main {
     visibility: hidden;
 }
 
-.readInferior {
-    display: flex;
-    position: fixed;
-    height: 110vh;
-    width: 100%;
-    background-color: rgba(95, 85, 39, 0.704);
-    align-items: center;
-    justify-content: center;
-}
 
-.modal {
-    height: 40vh;
-    width: 40vh;
-    background-color: rgb(133, 125, 91);
-    border: 1px solid rgb(230, 197, 48);
-    border-radius: 10px;
-}
-
-.inputs {
+.inputs,
+.buttonConfirmar {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -142,6 +137,78 @@ input {
     margin-left: 1vh;
     margin-top: -30vh;
     border-radius: 50px;
+    border: 2px solid rgb(228, 201, 65);
+    background-color: rgb(33, 29, 11);
+    color: white;
+}
+
+.entrar {
+    position: fixed;
+    height: 4vh;
+    width: 4vh;
+    margin: 1vh;
+    border-radius: 50px;
+    border: 2px solid rgb(228, 201, 65);
+    background-color: rgb(33, 29, 11);
+    color: white;
+}
+
+/* MODAL cadastrar */
+
+.readInferior {
+    display: none;
+}
+
+.modal {
+    height: 40vh;
+    width: 40vh;
+    background-color: rgb(133, 125, 91);
+    border: 1px solid rgb(230, 197, 48);
+    border-radius: 10px;
+}
+
+.modelModal {
+    display: flex;
+    position: fixed;
+    height: 110vh;
+    width: 100%;
+    background-color: rgba(95, 85, 39, 0.704);
+    align-items: center;
+    justify-content: center;
+}
+
+/* modal confirmar */
+
+.confirmar {
+    display: none;
+}
+
+.modalConfirmar {
+    display: grid;
+    height: 25vh;
+    width: 25vh;
+    background-color: rgb(133, 125, 91);
+    border: 1px solid rgb(230, 197, 48);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modelModal2 {
+    display: flex;
+    position: fixed;
+    height: 110vh;
+    width: 100%;
+    background-color: rgba(95, 85, 39, 0.704);
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonConfirmar>button {
+    height: 4vh;
+    width: 15vh;
+    margin-top: 2vh;
+    border-radius: 10px;
     border: 2px solid rgb(228, 201, 65);
     background-color: rgb(33, 29, 11);
     color: white;
