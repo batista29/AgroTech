@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manutenções</title>
+    <!-- lib de icons -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://seeklogo.com/images/B/boi-logo-43D7988D9C-seeklogo.com.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 </head>
-<body>
-    
+
+<body onload="carregar()">
+    <header>
+        <div>
+            <h1>AGROTECH</h1>
+        </div>
+        <div class="headerInferior">
+            <h2><a href="../motorista/index.html">Motorista</a></h2>
+            <h2><a href="../servicos/index.html">Serviços</a></h2>
+            <h2><a href="../usuario/index.html">Usuarios</a></h2>
+            <h2><a href="../frotas/index.html">Frotas</a></h2>
+            <h2 class="pricipalTela"><a class="pricipalTelaHref" href="../principal/index.html"></a>Tela principal</h2>
+        </div>
+    </header>
+    <main>
+        <div class="read">
+            <button class="entrar" onclick="abrirModal()">+</button>
+            <div class="superior model">
+                
+                <div class="readManutencoes">
+                    <h3 id="descricao"></h3>
+                    <h3 id="valor"></h3>
+                    <h3 id="data-inicio"></h3>
+                    <h3 id="data-fim"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="readInferior">
+            <div class="modal">
+                <div class="inputs">
+                    <button class="sair" onclick="fecharModal()">X</button>
+                    <input type="text" id="submitDescricao" placeholder="digite a descricao...">
+                    <input type="text" id="submitValor" placeholder="digite o valor...">
+                    <input type="date" id="submitData_inicio" placeholder="digite a data_inicio...">
+                    <input type="date" id="submitData_fim" placeholder="digite a data_fim...">
+                    <input type="texte" id="submitFotaId" placeholder="digite o id da frota...">
+                    <button class="enviar" onclick="adicionar()">ENVIAR</button>
+                </div>
+            </div>
+        </div>
+        <div class="confirmar">
+            <div class="modalConfirmar">
+                <div class="buttonConfirmar">
+                    <button class="addMais" onclick="adicionarMais()">ADICIONAR MAIS</button>
+                    <button class="recarregar" onclick="recarregar()">SAIR</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+<script src="index.js"></script>
+
 </html>

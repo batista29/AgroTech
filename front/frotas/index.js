@@ -1,14 +1,8 @@
 const urlFrotas = 'http://localhost:3000/frotas';
-const urlServicos = 'http://localhost:3000/servicos';
-const urlMotorista = 'http://localhost:3000/motorista';
 
 const principalSuperior = document.querySelector('.readSuperior');
 const listaFrotas = document.querySelector('.readFrotas');
 const listaMotoristas = document.querySelector('.readMotoristas');
-
-const principalInferior = document.querySelector('.readInferior');
-const listaServicos = document.querySelector('.readServicos');
-const listaManutencao = document.querySelector('.readManutencao');
 
 function carregar() {
     //frotas

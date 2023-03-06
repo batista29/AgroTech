@@ -47,3 +47,8 @@ img:hover {
     width: 30vh;
     transition-duration: 1s;
 }
+
+a{
+    color: rgb(184, 158, 40);
+    text-decoration: none;
+}
