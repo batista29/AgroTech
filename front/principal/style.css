@@ -24,6 +24,18 @@ header>h2 {
     font-size: 6vh;
 }
 
+h2 {
+    font-size: 5.6vh;
+    color: rgb(255, 216, 44);
+    background: linear-gradient(rgb(0, 0, 0) 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    transition: .4s, background-position 0s;
+}
+
+h2:hover {
+    --p: 100%;
+    color: rgb(255, 255, 255);
+}
+
 main {
     margin-top: 20vh;
     display: grid;

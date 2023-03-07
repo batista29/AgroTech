@@ -1,82 +1,87 @@
-const urlManutencao = 'http://localhost:3000/manutencao';
+const urlServicos = 'http://localhost:3000/servicos';
 
 const principalSuperior = document.querySelector('.read');
 const listaRead = document.querySelector('.superior');
-const listaManutencoes = document.querySelector('.readManutencoes');
+const listaServicos = document.querySelector('.readServicos');
 
 function carregar() {
     const options = { method: 'GET' };
 
-    fetch(urlManutencao, options)
+    fetch(urlServicos, options)
         .then(response => response.json())
         .then(res => {
             res.forEach(dados => {
 
                 let tabela = listaRead.cloneNode(true)
                 tabela.classList.remove("model")
-                tabela.querySelector('#descricao').innerHTML = 'Descrição: ' + dados.descricao
-                tabela.querySelector('#valor').innerHTML = 'Valor: ' + dados.valor
 
-                var dateInicio = new Date(dados.data_inicio);
-                let dataInicioFormatada = dateInicio.toLocaleDateString("pt-BR", {
+                var dateSaida = new Date(dados.data_saida);
+                let dataSaidaFormatada = dateSaida.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
 
-                var dateFim = new Date(dados.data_fim);
-                let dataFimFormatada = dateFim.toLocaleDateString("pt-BR", {
+                var dateRetorno = new Date(dados.data_retorno);
+                let dataRetornoFormatada = dateRetorno.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
 
-                tabela.querySelector('#data-inicio').innerHTML = 'Data-inicio: ' + dataInicioFormatada
-                if (dados.data_fim == null) {
-                    tabela.querySelector('#data-fim').innerHTML = 'Data- fim: Ainda em execução.'
+                tabela.querySelector('#data_saida').innerHTML = 'Data de saida: ' + dataSaidaFormatada
+                if (dados.data_retorno == null) {
+                    tabela.querySelector('#data_retorno').innerHTML = 'Data-retorno: Ainda em execução.'
                 } else {
-                    tabela.querySelector('#data-fim').innerHTML = 'Data-fim: ' + dataFimFormatada
+                    tabela.querySelector('#data_retorno').innerHTML = 'Data de retorno ' + dataRetornoFormatada
                 }
+                tabela.querySelector('#descricao').innerHTML = 'Descrição: ' + dados.descricao
+                tabela.querySelector('#motoristaId').innerHTML = 'Motorista id: ' + dados.motoristaId
+
                 principalSuperior.appendChild(tabela)
             });
         })
         .catch(err => console.error(err));
 }
 
-
 function adicionar() {
 
+    var data_saida = document.querySelector('#submitData_saida');
+    var data_retorno = document.querySelector('#submitData_retorno');
     var descricao = document.querySelector('#submitDescricao');
-    var valor = document.querySelector('#submitValor');
-    var data_inicio = document.querySelector('#submitData_inicio');
-    var data_fim = document.querySelector('#submitData_fim');
-    var frotaId = document.querySelector('#submitFotaId');
+    var motoristaId = document.querySelector('#submitMotoristaId');
+    var frotaId = document.querySelector('#submitFrotaId');
 
-    var data_inicioSubmit = data_inicio.value + "T00:00:00.000Z"
-    var data_fimSubmit = data_fim.value + "T00:00:00.000Z"
+    var data_saidaSubmit = data_saida.value + "T00:00:00.000Z"
+
+    console.log(data_retorno.value)
+
+    if (data_retorno.value == null || undefined || "" || " ") {
+        var data_retornoSubmit = null
+    } else {
+        var data_retornoSubmit = data_retorno.value + "T00:00:00.000Z"
+    }
 
     let dados = {
+        data_saida: data_saidaSubmit,
+        data_retorno: data_retornoSubmit,
         descricao: descricao.value,
-        valor: parseFloat(valor.value),
-        data_inicio: data_inicioSubmit,
-        data_fim: data_fimSubmit,
+        motoristaId: Number(motoristaId.value),
         frotaId: Number(frotaId.value)
     }
 
-    console.log(dados)
-
-    if (dados.descricao && dados.valor && dados.data_inicio && dados.data_fim && dados.frotaId !== "" || null) {
+    if (dados.data_saida && dados.descricao && dados.motoristaId && dados.frotaId !== "" || null) {
         console.log("CERTO", dados)
 
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3ODE4NzQxMiwiZXhwIjoxNjc4MjIzNDEyfQ.69yj-Gio6ShoEVMfuSATJZwJW6kEhSJsv0gnOCWbZng.5u6jxo-HsQY_TwET4o6TY1J_2zRUkZkUO3uoke7UIQ8'
+                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3ODE4OTAyMiwiZXhwIjoxNjc4MjI1MDIyfQ.JXTgSKifnmOAdthxN2AXrxDIVI8bYvGPsC-MylFkXV4'
             },
             body: JSON.stringify(dados)
         };
 
-        fetch('http://localhost:3000/manutencao', options)
+        fetch('http://localhost:3000/servicos', options)
             .then(res => {
                 if (res.status === 200) {
-                    alert('MANUTENÇÃO ADICIONADA COM SUCESSO')
+                    alert('SERVIÇO ADICIONADA COM SUCESSO')
                     abrirModal2()
                 } else {
                     alert("ALGO DEU ERRADO, FAÇA LOGIN NOVAMENTE, VERIFIQUE SE VOCÊ TEM AS PERMISSÕES NECESSÁRIAS E AVERIGUE SE OS DADOS ENTÃO ESCRITOS CORRETAMENTE.")
@@ -88,7 +93,7 @@ function adicionar() {
     } else {
         console.log("Errado", dados)
         alert("Insira os dados pedidos")
-        window.location.reload()
+        abrirModal()
     }
 }
 
