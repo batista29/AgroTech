@@ -52,6 +52,7 @@ div {
 }
 
 img {
+    cursor: pointer;
     width: 25vh;
 }
 

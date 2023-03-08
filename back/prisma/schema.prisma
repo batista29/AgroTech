@@ -52,6 +52,6 @@ model Manutencao {
   valor       Float
   data_inicio DateTime
   data_fim    DateTime?
-  Frota       Frota?    @relation(fields: [frotaId], references: [id])
-  frotaId     Int?
+  Frota       Frota    @relation(fields: [frotaId], references: [id])
+  frotaId     Int
 }

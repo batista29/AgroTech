@@ -67,13 +67,14 @@ function adicionar() {
     }
 
     if (dados.data_saida && dados.descricao && dados.motoristaId && dados.frotaId !== "" || null) {
-        console.log("CERTO", dados)
+        
+        let token = JSON.parse(localStorage.getItem('user'));
 
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3ODE4OTAyMiwiZXhwIjoxNjc4MjI1MDIyfQ.JXTgSKifnmOAdthxN2AXrxDIVI8bYvGPsC-MylFkXV4'
+                authorization: token.token
             },
             body: JSON.stringify(dados)
         };

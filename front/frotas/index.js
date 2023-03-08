@@ -26,8 +26,6 @@ function carregar() {
 function adicionar() {
 
     var marca = document.querySelector('#marca');
-
-
     var modelo = document.querySelector('#modelo');
     var placa = document.querySelector('#placa');
 
@@ -38,13 +36,14 @@ function adicionar() {
     }
 
     if (dados.marca && dados.modelo && dados.placa !== "" || null) {
-        console.log("CERTO", dados)
+
+        let token = JSON.parse(localStorage.getItem('user'));
 
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3Nzg0MTY0NiwiZXhwIjoxNjc3ODc3NjQ2fQ.7IZzu5AnS5khheqzXbquTPGsS-0TcyDnPCRVIfSrj3c'
+                authorization: token.token
             },
             body: JSON.stringify(dados)
         };
@@ -59,13 +58,38 @@ function adicionar() {
                     alert("CASO NÃO FUNCIONE, LIGUE PARA A EQUIPE DE TI.")
                 }
             })
-            .then(response => console.log("A resposata foi: ", response))
+            .then(response => { return response })
             .catch(err => console.error(err));
     } else {
         console.log("Errado", dados)
         alert("Insira os dados pedidos")
         window.location.reload()
     }
+}
+
+function editar(id) {
+    var marcaEdit = document.querySelector('#marcaEdit');
+    var modeloEdit = document.querySelector('#modeloEdit');
+    var placaEdit = document.querySelector('#placaEdit');
+
+    let dados = {
+        marca: marcaEdit.value,
+        modelo: modeloEdit.value,
+        placa: placaEdit.value
+    }
+
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    };
+
+    fetch('http://localhost:3000/frotas/' + id, options)
+        .then(resp => {
+            console.log(resp)
+        })
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 }
 
 function abrirModal() {

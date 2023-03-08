@@ -18,20 +18,19 @@ function login() {
     };
 
     fetch(urlLogin, options)
-        .then(res => {
-            console.log(res)
-            if (res.status === 404) {
-                alert("Login deu errado")
-            } else if (res.status === 202) {
-                alert("Ok")
-                window.location.href = '../principal/index.html'
+        .then(response => {
+            if (response.status == 404) {
+                document.getElementById("error-message").style.display = "block"
+            } if (response.status == 200) {
+                window.location.href = "../principal/index.html"
             }
-            else {
-                alert("algo deu errado, tente novamente")
-            }
+            return response.json()
         })
-        .then(response => console.log(response))
+        .then(resp => {
+            localStorage.setItem('user', JSON.stringify({ "id": resp.result.id, "nome": resp.result.nome, "cargo": resp.result.cargo, "token": resp.result.token }));
+        })
 }
+
 
 btn.addEventListener('click', function () {
     let input = document.querySelector('#password');

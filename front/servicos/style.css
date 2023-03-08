@@ -131,6 +131,7 @@ p {
 }
 
 .enviar {
+    cursor: pointer;
     height: 4vh;
     margin-top: 5vh;
     border-radius: 10px;
@@ -140,6 +141,7 @@ p {
 }
 
 .sair {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;
@@ -152,6 +154,7 @@ p {
 }
 
 .entrar {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;

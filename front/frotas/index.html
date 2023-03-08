@@ -19,17 +19,18 @@
         <div class="headerInferior">
             <h2><a href="../motorista/index.html">Motorista</a></h2>
             <h2><a href="../servicos/index.html">Serviços</a></h2>
+            <h2 class="pricipalTela"><a class="pricipalTelaHref" href="../principal/index.html">Tela principal</a></h2>
             <h2><a href="../usuario/index.html">Usuarios</a></h2>
             <h2><a href="../manutencoes/index.html">Manutenções</a></h2>
-            <h2 class="pricipalTela"><a class="pricipalTelaHref" href="../principal/index.html">Tela principal</a></h2>
         </div>
     </header>
     <main>
-       
+
         <div class="readSuperior">
             <button class="entrar" onclick="abrirModal()">+</button>
             <div class="superior model">
                 <div class="readFrotas">
+                    <button><img src="https://cdn-icons-png.flaticon.com/512/1904/1904300.png" alt=""></button>
                     <h3 class="marcaFrota"></h3>
                     <h3 class="modeloFrota"></h3>
                     <h3 class="placaFrota"></h3>
@@ -41,10 +42,16 @@
             <div class="modal">
                 <div class="inputs">
                     <button class="sair" onclick="fecharModal()">X</button>
+                    <h2>Adicionar</h2>
                     <input type="text" id="marca" placeholder="digite a marca...">
                     <input type="text" id="modelo" placeholder="digite o modelo...">
                     <input type="text" id="placa" placeholder="digite a placa...">
                     <button class="enviar" onclick="adicionar()">ENVIAR</button>
+                    <h2>Editar</h2>
+                    <input type="text" id="marcaEdit" placeholder="digite a marca...">
+                    <input type="text" id="modeloEdit" placeholder="digite o modelo...">
+                    <input type="text" id="placaEdit" placeholder="digite a placa...">
+                    <button class="enviar" onclick="adicionar()">EDITAR</button>
                 </div>
             </div>
         </div>

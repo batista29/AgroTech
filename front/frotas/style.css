@@ -106,7 +106,6 @@ main {
     visibility: hidden;
 }
 
-
 .inputs,
 .buttonConfirmar {
     display: grid;
@@ -123,11 +122,12 @@ hr {
 input {
     height: 3vh;
     width: 20vh;
-    margin-top: 6vh;
+    margin-top: 3vh;
     text-align: center;
 }
 
 .enviar {
+    cursor: pointer;
     height: 4vh;
     margin-top: 5vh;
     border-radius: 10px;
@@ -137,6 +137,7 @@ input {
 }
 
 .sair {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;
@@ -149,6 +150,7 @@ input {
 }
 
 .entrar {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;
@@ -157,6 +159,20 @@ input {
     border: 2px solid rgb(228, 201, 65);
     background-color: rgb(33, 29, 11);
     color: white;
+}
+
+button>img {
+    height: 3vh;
+}
+
+button {
+    cursor: pointer;
+    background-color: rgb(230, 197, 48);
+    margin-bottom: 1vh;
+}
+
+button:hover {
+    background-color: rgb(255, 241, 176);
 }
 
 /* MODAL cadastrar */

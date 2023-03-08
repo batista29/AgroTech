@@ -59,32 +59,40 @@ function adicionar() {
         frotaId: Number(frotaId.value)
     }
 
-    console.log(dados)
-
     if (dados.descricao && dados.valor && dados.data_inicio && dados.data_fim && dados.frotaId !== "" || null) {
-        console.log("CERTO", dados)
+
+        let token = JSON.parse(localStorage.getItem('user'));
 
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5vbWUiOiJKQU8iLCJlbWFpbCI6Ijg5MEBnbWFpbC5jb20iLCJzZW5oYSI6IiQyYSQxMCQ0ckx4ZmdrVWxLb1hodnllSXdOc28uRGRRemZDV0dsc2dyQm96Vk9mWi5TaHhqekFHcGFuRyIsImNhcmdvIjoiR0VSRU5URSIsImlhdCI6MTY3ODE4NzQxMiwiZXhwIjoxNjc4MjIzNDEyfQ.69yj-Gio6ShoEVMfuSATJZwJW6kEhSJsv0gnOCWbZng.5u6jxo-HsQY_TwET4o6TY1J_2zRUkZkUO3uoke7UIQ8'
+                authorization: token.token
             },
             body: JSON.stringify(dados)
         };
+
+        console.log(options)
 
         fetch('http://localhost:3000/manutencao', options)
             .then(res => {
                 if (res.status === 200) {
                     alert('MANUTENÇÃO ADICIONADA COM SUCESSO')
                     abrirModal2()
-                } else {
-                    alert("ALGO DEU ERRADO, FAÇA LOGIN NOVAMENTE, VERIFIQUE SE VOCÊ TEM AS PERMISSÕES NECESSÁRIAS E AVERIGUE SE OS DADOS ENTÃO ESCRITOS CORRETAMENTE.")
-                    alert("CASO NÃO FUNCIONE, LIGUE PARA A EQUIPE DE TI.")
+                } else if (res.status === 404) {
+                    alert("ALGO DEU ERRADO, FAÇA LOGIN NOVAMENTE E VERIFIQUE AS SUAS PERMISSÕES PERMISSÕES")
+                    alert("VERIFIQUE SE A FROTA DE ID "+dados.frotaId+" EXISTE" )
+                    abrirModal2()
                 }
             })
             .then(response => console.log("A resposata foi: ", response))
-            .catch(err => console.error(err));
+            .catch(err => {
+                if (err == 'Failed to fetch') {
+                    alert('Falha nas informações, coloque números válidos')
+                }else{
+                    alert("Falha ao enviar")
+                }
+            });
     } else {
         console.log("Errado", dados)
         alert("Insira os dados pedidos")

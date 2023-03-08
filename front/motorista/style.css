@@ -92,8 +92,9 @@ main {
 }
 
 .superior {
-    height: 8vh;
+    height: 10vh;
     padding-left: 4vh;
+    margin-bottom: 2vh;
 }
 
 .inputs,
@@ -130,9 +131,11 @@ input {
     border: 2px solid rgb(228, 201, 65);
     background-color: rgb(33, 29, 11);
     color: white;
+    cursor: pointer;
 }
 
 .sair {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;
@@ -145,6 +148,7 @@ input {
 }
 
 .entrar {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;

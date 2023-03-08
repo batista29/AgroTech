@@ -123,6 +123,7 @@ input {
 }
 
 .enviar {
+    cursor: pointer;
     height: 4vh;
     margin-top: 5vh;
     border-radius: 10px;
@@ -132,6 +133,7 @@ input {
 }
 
 .sair {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;
@@ -144,6 +146,7 @@ input {
 }
 
 .entrar {
+    cursor: pointer;
     position: fixed;
     height: 4vh;
     width: 4vh;

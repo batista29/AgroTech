@@ -24,25 +24,32 @@ const read = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const usuario = await prisma.Usuario.findMany({
+
+    const user = await prisma.usuario.findFirst({
         where: { email: req.body.email }
+
+    }).catch(err => {
+        console.log(err)
     })
 
-    if (usuario.length > 0) {
-        if (await bcrypt.compare(req.body.senha, usuario[0].senha)) {
-           
-            jwt.sign(usuario[0], process.env.KEY, { expiresIn: '10h' }, function (err, token) {
-                
+    if (user) {
+        //comparando a senha que o usuario digitou com a senha criptgrafada
+        if (await bcrypt.compare(req.body.senha, user.senha)) {
+            var result = user
+
+            jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
+
                 if (err == null) {
-                    usuario[0]["token"] = token
-                    res.status(202).json({ usuario }).end()
+                    // adicionando um token quando o usuário logar
+                    result["token"] = token
+                    res.status(200).json({ result }).end()
                 } else {
                     res.status(404).json(err).end()
                 }
             })
         }
     } else {
-        res.status(404).json({ "menssagem": "usuario nop" }).end()
+        res.status(404).json({ "result": "usuario não encontrado" }).end()
     }
 }
 
