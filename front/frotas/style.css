@@ -235,3 +235,40 @@ button:hover {
     background-color: rgb(33, 29, 11);
     color: white;
 }
+
+/* modal editar */
+
+.editarInferior {
+    display: none;
+}
+
+.modalEditar {
+    display: grid;
+    height: 25vh;
+    width: 25vh;
+    background-color: rgb(133, 125, 91);
+    border: 1px solid rgb(230, 197, 48);
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modelModal3 {
+    display: flex;
+    position: fixed;
+    height: 110vh;
+    width: 100%;
+    background-color: rgba(95, 85, 39, 0.704);
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonEditar>button {
+    height: 4vh;
+    width: 15vh;
+    margin-top: 2vh;
+    border-radius: 10px;
+    border: 2px solid rgb(228, 201, 65);
+    background-color: rgb(33, 29, 11);
+    color: white;
+}

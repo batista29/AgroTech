@@ -40,7 +40,7 @@ const update = async (req, res) => {
             data_fim: req.body.data_fim,
         },
         where: {
-            id: Number(req.params.id)
+            id: Number(req.body.id)
         }
     });
 

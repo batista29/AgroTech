@@ -31,10 +31,24 @@
             <button class="entrar" onclick="abrirModal()">+</button>
             <div class="superior model">
                 <div class="readServicos">
+                    <button onclick="abrirModal3(this)"><img
+                            src="https://cdn-icons-png.flaticon.com/512/1904/1904300.png" alt=""></button>
+                    <h3 id="id"></h3>
                     <h3 id="data_saida"></h3>
                     <h3 id="data_retorno"></h3>
                     <h3 id="descricao"></h3>
                     <h3 id="motoristaId"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="editarInferior">
+            <div class="modalEditar">
+                <div class="inputs">
+                    <button class="sairEdit" onclick="fecharModalEditar()">X</button>
+                    <h2>Editar</h2>
+                    <input type="text" id="editDescricao" placeholder="digite a descricao...">
+
+                    <button class="enviar" onclick="editar()">Finalizar</button>
                 </div>
             </div>
         </div>

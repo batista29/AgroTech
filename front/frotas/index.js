@@ -14,6 +14,7 @@ function carregar() {
             res.forEach(dados => {
                 let tabela = listaFrotas.cloneNode(true)
                 tabela.classList.remove("model")
+                tabela.querySelector('.idFrota').innerHTML = 'Id: ' + dados.id
                 tabela.querySelector('.marcaFrota').innerHTML = 'Marca: ' + dados.marca
                 tabela.querySelector('.modeloFrota').innerHTML = 'Modelo: ' + dados.modelo
                 tabela.querySelector('.placaFrota').innerHTML = 'Placa: ' + dados.placa
@@ -67,30 +68,6 @@ function adicionar() {
     }
 }
 
-function editar(id) {
-    var marcaEdit = document.querySelector('#marcaEdit');
-    var modeloEdit = document.querySelector('#modeloEdit');
-    var placaEdit = document.querySelector('#placaEdit');
-
-    let dados = {
-        marca: marcaEdit.value,
-        modelo: modeloEdit.value,
-        placa: placaEdit.value
-    }
-
-    const options = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados)
-    };
-
-    fetch('http://localhost:3000/frotas/' + id, options)
-        .then(resp => {
-            console.log(resp)
-        })
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-}
 
 function abrirModal() {
     let modalAparecer = document.querySelector(".readInferior");
@@ -114,4 +91,64 @@ function adicionarMais() {
 
 function recarregar() {
     window.location.reload()
+}
+
+function abrirModal3(id) {
+    let modalAparecer = document.querySelector(".editarInferior");
+    modalAparecer.classList.add("modelModal3")
+    var idEditar = id.parentNode.children[1].innerHTML.split(" ")[1]
+    localStorage.setItem('id_frotas', JSON.stringify({ "id": idEditar }));
+}
+
+
+function editar() {
+    var marcaEdit = document.querySelector('#editMarca');
+    var modeloEdit = document.querySelector('#editModelo');
+    var placaEdit = document.querySelector('#editPlaca');
+
+    let id = JSON.parse(localStorage.getItem('id_frotas'));
+
+    console.log(id.id)
+
+    let dados = {
+        id: Number(id.id),
+        marca: marcaEdit.value,
+        modelo: modeloEdit.value,
+        placa: placaEdit.value
+    }
+
+    if (dados.marca && dados.modelo && dados.placa !== "" || null) {
+
+        let token = JSON.parse(localStorage.getItem('user'));
+
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: token.token
+            },
+            body: JSON.stringify(dados)
+        };
+
+        fetch('http://localhost:3000/frotas/', options)
+            .then(res => {
+                if (res.status === 200) {
+                    alert('FROTA ALTERADA COM SUCESSO')
+                    window.location.reload()
+                } else {
+                    alert("ALGO DEU ERRADO")
+                }
+            })
+            .then(response => { return response })
+            .catch(err => console.error(err));
+    } else {
+        console.log("Errado", dados)
+        alert("Insira os dados pedidos")
+    }
+}
+
+
+function fecharModalEditar() {
+    let modalDesaparecer = document.querySelector(".editarInferior");
+    modalDesaparecer.classList.remove("modelModal3")
 }

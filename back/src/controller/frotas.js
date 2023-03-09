@@ -34,7 +34,7 @@ const update = async (req, res) => {
             placa: req.body.placa,
         },
         where: {
-            id: Number(req.params.id)
+            id: Number(req.body.id)
         }
     });
 

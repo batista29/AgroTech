@@ -13,6 +13,7 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     let servicos = await prisma.Servico.findMany({
         select: {
+            id:true,
             data_saida: true,
             data_retorno: true,
             descricao: true,
@@ -48,7 +49,7 @@ const update = async (req, res) => {
             descricao: req.body.descricao,
         },
         where: {
-            id: Number(req.params.motoristaId)
+            id: Number(req.body.motoristaId)
         }
     });
 

@@ -15,6 +15,7 @@ function carregar() {
                 let tabela = listaRead.cloneNode(true)
                 tabela.classList.remove("model")
 
+                tabela.querySelector('#id').innerHTML = 'ID: ' + dados.id
                 var dateSaida = new Date(dados.data_saida);
                 let dataSaidaFormatada = dateSaida.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
@@ -120,4 +121,65 @@ function adicionarMais() {
 
 function recarregar() {
     window.location.reload()
+}
+
+
+
+//update
+
+function abrirModal3(id) {
+    let modalAparecer = document.querySelector(".editarInferior");
+    modalAparecer.classList.add("modelModal3")
+    var idEditar = id.parentNode.children[1].innerHTML.split(" ")[1]
+    localStorage.setItem('idservico', JSON.stringify({ "id": idEditar }));
+}
+
+
+function editar() {
+    var editDescricao = document.querySelector('#editDescricao');
+
+    const date = new Date();
+    let ISO = date.toISOString();
+
+    let id = JSON.parse(localStorage.getItem('idservico'));
+
+    let dados = {
+        motoristaId: Number(id.id),
+        data_retorno: ISO,
+        descricao: editDescricao.value,
+    }
+
+    if (dados.descricao && dados.motoristaId && dados.data_retorno !== "" || null) {
+
+        let token = JSON.parse(localStorage.getItem('user'));
+
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: token.token
+            },
+            body: JSON.stringify(dados)
+        };
+
+        fetch('http://localhost:3000/servicos/', options)
+            .then(res => {
+                if (res.status === 200) {
+                    alert('SERVIÇO ALTERADO COM SUCESSO')
+                    window.location.reload()
+                } else {
+                    alert("ALGO DEU ERRADO")
+                }
+            })
+            .then(response => { return response })
+            .catch(err => console.error(err));
+    } else {
+        console.log("Errado", dados)
+        alert("Insira os dados pedidos")
+    }
+}
+
+function fecharModalEditar() {
+    let modalDesaparecer = document.querySelector(".editarInferior");
+    modalDesaparecer.classList.remove("modelModal3")
 }
