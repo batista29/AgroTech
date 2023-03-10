@@ -3,7 +3,7 @@ Trabalho pré TCC.
 
 * Trabalho sendo desenvolvido em JAVASCRIPT, NODE.JS, PRISMA.JS, HTML E CSS 
 
-<div align="center">
+<div align="left">
 <img src="https://cdn.iconscout.com/icon/free/png-256/javascript-2038874-1720087.png" alt="" width="50" height="50">
 <img src="https://cdn.iconscout.com/icon/free/png-256/node-js-1174925.png" alt="" height="50">
 <img src="https://cdn.worldvectorlogo.com/logos/prisma-2.svg" alt="" height="50">
