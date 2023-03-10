@@ -27,19 +27,25 @@ const readId = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    let motorista = await prisma.Motorista.update({
-        data: {
-            nome: req.body.nome,
-            email: req.body.email,
-            senha: req.body.senha,
-            cargo: req.body.cargo
-        },
-        where: {
-            id: Number(req.params.id)
-        }
-    });
+    try {
+        let motorista = await prisma.Motorista.update({
+            data: {
+                cpf: req.body.email,
+                cnh: req.body.senha,
+                nome: req.body.nome,
+            },
+            where: {
+                id: Number(req.params.id)
+            }
+        });
+        res.status(200).json(motorista).end();
 
-    res.status(200).json(motorista).end();
+    } catch (error) {
+        res.status(404).json(error).end();
+
+        console.log(error)
+    }
+
 }
 
 const del = async (req, res) => {

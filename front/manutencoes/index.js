@@ -130,13 +130,14 @@ function recarregar() {
 function abrirModal3(id) {
     let modalAparecer = document.querySelector(".editarInferior");
     modalAparecer.classList.add("modelModal3")
-    var idEditar = id.parentNode.children[1].innerHTML.split(" ")[1]
+    var idEditar = id.parentNode.children[1].innerHTML.split(" ")[1];
     localStorage.setItem('id_frotas', JSON.stringify({ "id": idEditar }));
 }
 
 
 function editar() {
     var editDescricao = document.querySelector('#editDescricao');
+    var editValor = document.querySelector('#editValor');
 
     const date = new Date();
     let ISO = date.toISOString();
@@ -144,12 +145,13 @@ function editar() {
     let id = JSON.parse(localStorage.getItem('id_frotas'));
 
     let dados = {
-        motoristaId: Number(id.id),
-        data_retorno: ISO,
+        id: Number(id.id),
         descricao: editDescricao.value,
+        valor:Number(editValor.value),
+        data_retorno: ISO,
     }
 
-    if (dados.descricao && dados.data_retorno && dados.data_fim !== "" || null) {
+    if (dados.descricao && dados.data_retorno && dados.valor !== "" || null) {
 
         let token = JSON.parse(localStorage.getItem('user'));
 
@@ -165,7 +167,7 @@ function editar() {
         fetch('http://localhost:3000/manutencao/', options)
             .then(res => {
                 if (res.status === 200) {
-                    alert('FROTA ALTERADA COM SUCESSO')
+                    alert('MANUTENÇÃO ALTERADA COM SUCESSO')
                     window.location.reload()
                 } else {
                     alert("ALGO DEU ERRADO")

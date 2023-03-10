@@ -18,7 +18,7 @@ const Motorista = require('../controller/Motorista');
 router.post('/motorista',Middleware.autenticacao, Motorista.create)
 router.get('/motorista', Motorista.read)
 router.get('/motorista/:id', Motorista.readId)
-router.put('/motorista',Middleware.autenticacao, Motorista.update)
+router.put('/motorista/:id',Middleware.autenticacao, Motorista.update)
 router.delete('/motorista/:id',Middleware.autenticacao, Motorista.del)
 
 const Servicos = require('../controller/servicos');

@@ -25,7 +25,7 @@ const read = async (req, res) => {
 
 const login = async (req, res) => {
 
-    const user = await prisma.usuario.findFirst({
+    const user = await prisma.Usuario.findFirst({
         where: { email: req.body.email }
 
     }).catch(err => {
