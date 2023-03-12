@@ -33,18 +33,24 @@ const readId = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    let manutencao = await prisma.Manutencao.update({
-        data: {
-            descricao: req.body.descricao,
-            valor: req.body.valor,
-            data_fim: req.body.data_fim,
-        },
-        where: {
-            id: Number(req.body.id)
-        }
-    });
+    try {
+        let manutencao = await prisma.Manutencao.update({
+            data: {
+                descricao: req.body.descricao,
+                valor: req.body.valor,
+                data_fim: req.body.data_fim,
+            },
+            where: {
+                id: Number(req.body.id)
+            }
+        });
+        res.status(200).json(manutencao).end();
 
-    res.status(200).json(manutencao).end();
+    } catch (error) {
+        res.status(404).json(error).end();
+
+        console.log(error)
+    }
 }
 
 const del = async (req, res) => {

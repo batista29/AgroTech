@@ -64,19 +64,25 @@ const readId = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    let usuario = await prisma.Usuario.update({
-        data: {
-            nome: req.body.nome,
-            email: req.body.email,
-            senha: req.body.senha,
-            cargo: req.body.cargo
-        },
-        where: {
-            id: Number(req.params.id)
-        }
-    });
+    try {
+        let usuario = await prisma.Usuario.update({
+            data: {
+                nome: req.body.nome,
+                email: req.body.email,
+                senha: req.body.senha,
+                cargo: req.body.cargo
+            },
+            where: {
+                id: Number(req.params.id)
+            }
+        });
+        res.status(200).json(usuario).end();
+        
+    } catch (error) {
+        res.status(404).json(error).end();
 
-    res.status(200).json(usuario).end();
+        console.log(error)
+    }
 }
 
 const del = async (req, res) => {

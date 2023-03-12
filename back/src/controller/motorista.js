@@ -3,11 +3,17 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
-    let motorista = await prisma.Motorista.create({
-        data: req.body
-    });
-
-    res.status(200).json(motorista).end();
+    try {
+        let motorista = await prisma.Motorista.create({
+            data: req.body
+        });
+        res.status(200).json(motorista).end();
+    } catch (err) {
+        if (err.code == "P2003")
+            res.status(404).json(err).end();
+        else
+            res.status(400).json(err).end();
+    }
 }
 
 const read = async (req, res) => {
@@ -45,7 +51,6 @@ const update = async (req, res) => {
 
         console.log(error)
     }
-
 }
 
 const del = async (req, res) => {
