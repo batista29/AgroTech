@@ -20,7 +20,7 @@ function login() {
     fetch(urlLogin, options)
         .then(response => {
             if (response.status == 404) {
-                document.getElementById("error-message").style.display = "block"
+                alert("Senha incorreta")
             } if (response.status == 200) {
                 window.location.href = "../principal/index.html"
             }

@@ -138,20 +138,22 @@ function abrirModal3(id) {
 function editar() {
     var editDescricao = document.querySelector('#editDescricao');
     var editValor = document.querySelector('#editValor');
+    var editRetornoInp = document.querySelector('#editRetorno');
 
-    const date = new Date();
-    let ISO = date.toISOString();
+    var editRetorno = editRetornoInp.value + "T00:00:00.000Z"
 
     let id = JSON.parse(localStorage.getItem('id_frotas'));
 
     let dados = {
         id: Number(id.id),
         descricao: editDescricao.value,
-        valor:Number(editValor.value),
-        data_retorno: ISO,
+        valor: Number(editValor.value),
+        data_fim: editRetorno,
     }
 
-    if (dados.descricao && dados.data_retorno && dados.valor !== "" || null) {
+    console.log(dados.data_retorno)
+
+    if (dados.descricao && dados.data_fim && dados.valor !== "" || null) {
 
         let token = JSON.parse(localStorage.getItem('user'));
 

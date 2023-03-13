@@ -68,7 +68,7 @@ function adicionar() {
     }
 
     if (dados.data_saida && dados.descricao && dados.motoristaId && dados.frotaId !== "" || null) {
-        
+
         let token = JSON.parse(localStorage.getItem('user'));
 
         const options = {
@@ -137,15 +137,15 @@ function abrirModal3(id) {
 
 function editar() {
     var editDescricao = document.querySelector('#editDescricao');
+    var editData_retornoInp = document.querySelector('#editData_retorno');
 
-    const date = new Date();
-    let ISO = date.toISOString();
+    var editRetorno = editData_retornoInp.value + "T00:00:00.000Z"
 
     let id = JSON.parse(localStorage.getItem('idservico'));
 
     let dados = {
         motoristaId: Number(id.id),
-        data_retorno: ISO,
+        data_retorno: editRetorno,
         descricao: editDescricao.value,
     }
 
