@@ -23,6 +23,7 @@ model Motorista {
   cpf      Int
   cnh      Int
   nome     String
+  status   Boolean   @default(false)
   servicos Servico[]
 }
 
@@ -31,6 +32,7 @@ model Frota {
   marca       String
   modelo      String
   placa       String
+  status      Boolean      @default(false)
   servicos    Servico[]
   manutencoes Manutencao[]
 }
@@ -43,7 +45,7 @@ model Servico {
   motoristaId  Int?
   frotaId      Int?
   Motorista    Motorista? @relation(fields: [motoristaId], references: [id])
-  Frota Frota? @relation(fields: [frotaId], references: [id])
+  Frota        Frota?     @relation(fields: [frotaId], references: [id])
 }
 
 model Manutencao {
@@ -52,6 +54,6 @@ model Manutencao {
   valor       Float
   data_inicio DateTime
   data_fim    DateTime?
-  Frota       Frota    @relation(fields: [frotaId], references: [id])
+  Frota       Frota     @relation(fields: [frotaId], references: [id])
   frotaId     Int
 }

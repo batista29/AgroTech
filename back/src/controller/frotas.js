@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 
+
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
@@ -14,6 +15,54 @@ const create = async (req, res) => {
         else
             res.status(400).json(err).end();
     }
+}
+
+const updateDisponivel = async (id) => {
+
+
+    let frotas = await prisma.Frota.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true,
+            status: true
+        }
+    })
+
+    let frotasUpdate = await prisma.Frota.update({
+        where: {
+            id: frotas.id
+        },
+        data: {
+            status: false
+        }
+    })
+
+    console.log(frotasUpdate)
+}
+
+const updateIndisponivel = async (id) => {
+    let frotas = await prisma.Frota.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true,
+            status: true
+        }
+    })
+
+    let frotasUpdate = await prisma.Frota.update({
+        where: {
+            id: frotas.id
+        },
+        data: {
+            status: true
+        }
+    })
+
+    console.log(frotasUpdate)
 }
 
 const read = async (req, res) => {
@@ -68,5 +117,7 @@ module.exports = {
     read,
     readId,
     update,
-    del
+    del,
+    updateDisponivel,
+    updateIndisponivel
 }

@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const Frota = require('./frotas')
 
 const prisma = new PrismaClient();
 
@@ -7,6 +8,8 @@ const create = async (req, res) => {
         let manutencao = await prisma.Manutencao.create({
             data: req.body
         });
+
+        Frota.updateIndisponivel(manutencao.frotaId)
         res.status(200).json(manutencao).end();
     } catch (err) {
         if (err.code == "P2003")
@@ -34,6 +37,7 @@ const readId = async (req, res) => {
 
 const update = async (req, res) => {
     try {
+
         let manutencao = await prisma.Manutencao.update({
             data: {
                 descricao: req.body.descricao,
@@ -44,6 +48,10 @@ const update = async (req, res) => {
                 id: Number(req.body.id)
             }
         });
+        if (req.body.data_fim != null) {
+            Frota.updateDisponivel(manutencao.frotaId)
+        }
+
         res.status(200).json(manutencao).end();
 
     } catch (error) {

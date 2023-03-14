@@ -93,4 +93,80 @@ function carregar() {
       );
     })
 
+  const optionsServicos = { method: 'GET' };
+
+  const principalSuperior = document.querySelector('.readServicosMain');
+  const listaRead = document.querySelector('.superior');
+  const listaServicos = document.querySelector('.readServicos');
+
+  fetch("http://localhost:3000/servicos", optionsServicos)
+    .then(response => response.json())
+    .then(res => {
+      res.forEach(dados => {
+
+        console.log(dados)
+        let tabela = listaRead.cloneNode(true)
+        tabela.classList.remove("model")
+
+        tabela.querySelector('#id').innerHTML = 'ID: ' + dados.id
+        var dateSaida = new Date(dados.data_saida);
+        let dataSaidaFormatada = dateSaida.toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        });
+
+        var dateRetorno = new Date(dados.data_retorno);
+        let dataRetornoFormatada = dateRetorno.toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        });
+
+        tabela.querySelector('#data_saida').innerHTML = 'Data de saida: ' + dataSaidaFormatada
+        if (dados.data_retorno == null) {
+          tabela.querySelector('#data_retorno').innerHTML = 'Data-retorno: Ainda em execução.'
+        } else {
+          tabela.querySelector('#data_retorno').innerHTML = 'Data de retorno ' + dataRetornoFormatada
+        }
+        tabela.querySelector('#descricao').innerHTML = 'Descrição: ' + dados.descricao
+        tabela.querySelector('#motoristaId').innerHTML = 'Motorista id: ' + dados.motoristaId
+
+        principalSuperior.appendChild(tabela)
+      });
+    })
+
+  const principalSuperiorManutencoes = document.querySelector('.readManutencoesMain');
+  const listaReadManutencoes = document.querySelector('.superiorManutencoes');
+  const listaManutencoes = document.querySelector('.readManutencoes');
+
+  const optionsManutencao = { method: 'GET' };
+
+  fetch("http://localhost:3000/manutencao", optionsManutencao)
+    .then(response => response.json())
+    .then(res => {
+      res.forEach(dados2 => {
+        console.log(dados2)
+
+        let tabela = listaReadManutencoes.cloneNode(true)
+        tabela.classList.remove("model2")
+        tabela.querySelector('#idManutencao').innerHTML = 'ID: ' + dados2.id
+        tabela.querySelector('#descricaoManutencao').innerHTML = 'Descrição: ' + dados2.descricao
+        tabela.querySelector('#valor').innerHTML = 'Valor: ' + dados2.valor
+
+        var dateInicio = new Date(dados2.data_inicio);
+        let dataInicioFormatada = dateInicio.toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        });
+
+        var dateFim = new Date(dados2.data_fim);
+        let dataFimFormatada = dateFim.toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        });
+
+        tabela.querySelector('#data-inicio').innerHTML = 'Data-inicio: ' + dataInicioFormatada
+        if (dados2.data_fim == null) {
+          tabela.querySelector('#data-fim').innerHTML = 'Data- fim: Ainda em execução.'
+        } else {
+          tabela.querySelector('#data-fim').innerHTML = 'Data-fim: ' + dataFimFormatada
+        }
+        principalSuperiorManutencoes.appendChild(tabela)
+      });
+    })
 }

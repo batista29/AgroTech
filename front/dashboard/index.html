@@ -13,21 +13,45 @@
 
 <body onload="carregar()">
     <header>
-        <h3>teste</h3>
+        <h1>AGROTECH</h1>
     </header>
     <main>
         <div class="graficos">
             <div class="graficoServicos">
-                <h1>Serviços</h1>
+                <h2>Serviços</h2>
                 <canvas id="myChart1"></canvas>
             </div>
             <div class="graficoManutencoes">
-                <h1>Manutenções</h1>
+                <h2>Manutenções</h2>
                 <canvas id="myChart2"></canvas>
             </div>
+            <p>Relatório de Serviço:</p>
+            <p>Relatório de Manutenções:</p>
         </div>
-        <div class="relatorios">
 
+        <div class="relatorios">
+            <div class="readServicosMain">
+                <div class="superior model">
+                    <div class="readServicos">
+                        <h3 id="id"></h3>
+                        <h3 id="data_saida"></h3>
+                        <h3 id="data_retorno"></h3>
+                        <h3 id="descricao"></h3>
+                        <h3 id="motoristaId"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="readManutencoesMain">
+                <div class="superiorManutencoes model2">
+                    <div class="readManutencoes">
+                        <h3 id="idManutencao"></h3>
+                        <h3 id="descricaoManutencao"></h3>
+                        <h3 id="valor"></h3>
+                        <h3 id="data-inicio"></h3>
+                        <h3 id="data-fim"></h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>
