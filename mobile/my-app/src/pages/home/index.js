@@ -1,21 +1,16 @@
-import { StyleSheet, TextInput, View, Image, Text, TouchableOpacity } from "react-native";
-// import { useState } from 'react'
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as React from 'react';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import manutencao from './manutencao/index.js'
+import relatorio from './relatorioManutencao/index.js'
+
+const Tab = createMaterialTopTabNavigator();
 
 export default function Home() {
-
     return (
-        <View style={styles.main}>
-            <Text>teste home</Text>
-        </View>
+        <Tab.Navigator>
+            <Tab.Screen name="manutencao" component={manutencao} />
+            <Tab.Screen name="relatorio" component={relatorio} />
+        </Tab.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    main: {
-        backgroundColor: "#0C153C",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});

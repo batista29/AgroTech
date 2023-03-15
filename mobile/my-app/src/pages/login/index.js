@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
                 }
             })
             .then(data => {
-                AsyncStorage.setItem('user', JSON.stringify({ "id": data.result.id, "nome": data.result.nome, "cargo": data.result.cargo, "token": data.result.token }));
+                return console.log(data)
             })
     }
 
@@ -41,7 +41,7 @@ export default function Login({ navigation }) {
         <View style={styles.main}>
             <View style={styles.container}>
                 <Text style={styles.titulo}>ENTRAR NA CONTA</Text>
-                <Text>E-mail</Text>
+                <Text style={styles.text}>E-mail</Text>
                 <TextInput
                     style={styles.input}
                     value={email}
@@ -49,7 +49,7 @@ export default function Login({ navigation }) {
                         setEmail(value);
                     }}
                 ></TextInput>
-                <Text>Senha</Text>
+                <Text style={styles.text}>Senha</Text>
 
                 <TextInput
                     style={styles.input}
@@ -74,33 +74,44 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
     main: {
-        backgroundColor: "#0C153C",
+        backgroundColor: "rgb(140, 138, 130)",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },
     container: {
-        height: 280,
-        width: 280,
-        backgroundColor: "#cdcdd4",
+        height: 300,
+        width: 300,
+        backgroundColor: "#4c4223",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 40
+        borderRadius: 40,
+        border: '4px solid rgb(255, 255, 255)'
     },
     input: {
         backgroundColor: "#fff",
         margin: 5,
     },
     titulo: {
+        color: 'rgb(255, 255, 255)',
         margin: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     title: {
-        color: "#fff",
-    },
-    title2: {
-        color: "#fff",
+        color: "black",
     },
     button: {
-        backgroundColor: "#001B6B",
+        backgroundColor: "rgb(255, 255, 255)",
+        borderRadius: '5px',
+        border: '3px solid #black',
+        textAlign: 'center',
+        marginTop: '2vh',
+        width: '10vh'
     },
+    text: {
+        color: 'rgb(255, 255, 255)',
+        fontSize: 20,
+        fontWeight: 'bold',
+    }
 });

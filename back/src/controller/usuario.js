@@ -32,6 +32,7 @@ const login = async (req, res) => {
     })
 
     if (user) {
+
         //comparando a senha que o usuario digitou com a senha criptgrafada
         if (await bcrypt.compare(req.body.senha, user.senha)) {
             var result = user
@@ -40,6 +41,7 @@ const login = async (req, res) => {
 
                 if (err == null) {
                     // adicionando um token quando o usuário logar
+
                     result["token"] = token
                     res.status(200).json({ result }).end()
                 } else {
