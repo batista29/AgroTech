@@ -23,7 +23,7 @@ model Motorista {
   cpf      Int
   cnh      Int
   nome     String
-  status   Boolean   @default(false)
+  status   Boolean   @default(true)
   servicos Servico[]
 }
 
@@ -32,7 +32,7 @@ model Frota {
   marca       String
   modelo      String
   placa       String
-  status      Boolean      @default(false)
+  status      Boolean      @default(true)
   servicos    Servico[]
   manutencoes Manutencao[]
 }

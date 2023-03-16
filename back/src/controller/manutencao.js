@@ -4,23 +4,57 @@ const Frota = require('./frotas')
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
-    try {
-        let manutencao = await prisma.Manutencao.create({
-            data: req.body
-        });
 
-        Frota.updateIndisponivel(manutencao.frotaId)
-        res.status(200).json(manutencao).end();
-    } catch (err) {
-        if (err.code == "P2003")
-            res.status(404).json(err).end();
-        else
-            res.status(400).json(err).end();
+    let veiculo = await prisma.frota.findUnique({
+        where: {
+            id: req.body.frotaId
+        },
+        select: {
+            status: true
+        }
+    })
+
+    if (veiculo.status == false) {
+        res.status(404).json({ "response": "veiculo ocupado" }).end();
+    } else {
+        try {
+            let manutencao = await prisma.Manutencao.create({
+                data: req.body,
+                select: {
+                    Frota: true
+                }
+            });
+
+            Frota.updateIndisponivel(manutencao.frotaId)
+
+            res.status(200).json(manutencao).end();
+        } catch (err) {
+            if (err.code == "P2003")
+                res.status(404).json(err).end();
+            else
+                res.status(400).json(err).end();
+        }
     }
 }
 
 const read = async (req, res) => {
-    let manutencao = await prisma.Manutencao.findMany();
+    let manutencao = await prisma.Manutencao.findMany({
+        select: {
+            id: true,
+            descricao: true,
+            valor: true,
+            data_inicio: true,
+            data_fim: true,
+            Frota: {
+                select: {
+                    marca: true,
+                    modelo: true,
+                    placa: true,
+                    status: true
+                }
+            }
+        }
+    });
 
     res.status(200).json(manutencao).end();
 }

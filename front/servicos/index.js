@@ -5,6 +5,7 @@ const listaRead = document.querySelector('.superior');
 const listaServicos = document.querySelector('.readServicos');
 
 function carregar() {
+
     const options = { method: 'GET' };
 
     fetch(urlServicos, options)
@@ -50,8 +51,6 @@ function adicionar() {
     var frotaId = document.querySelector('#submitFrotaId');
 
     var data_saidaSubmit = data_saida.value + "T00:00:00.000Z"
-
-    console.log(data_retorno.value)
 
     if (data_retorno.value == null || undefined || "" || " ") {
         var data_retornoSubmit = null
@@ -123,8 +122,6 @@ function recarregar() {
     window.location.reload()
 }
 
-
-
 //update
 
 function abrirModal3(id) {
@@ -133,7 +130,6 @@ function abrirModal3(id) {
     var idEditar = id.parentNode.children[1].innerHTML.split(" ")[1]
     localStorage.setItem('idservico', JSON.stringify({ "id": idEditar }));
 }
-
 
 function editar() {
     var editDescricao = document.querySelector('#editDescricao');
@@ -144,12 +140,14 @@ function editar() {
     let id = JSON.parse(localStorage.getItem('idservico'));
 
     let dados = {
-        motoristaId: Number(id.id),
+        id: Number(id.id),
         data_retorno: editRetorno,
         descricao: editDescricao.value,
     }
 
-    if (dados.descricao && dados.motoristaId && dados.data_retorno !== "" || null) {
+    console.log(dados)
+
+    if (dados.descricao && dados.id && dados.data_retorno !== "" || null) {
 
         let token = JSON.parse(localStorage.getItem('user'));
 

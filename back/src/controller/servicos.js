@@ -1,18 +1,53 @@
 const { PrismaClient } = require('@prisma/client');
+const Motorista = require('./motorista')
+const Frota = require('./frotas')
 
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
-    try {
-        let servicos = await prisma.Servico.create({
-            data: req.body
-        });
-        res.status(200).json(servicos).end();
-    } catch (err) {
-        if (err.code == "P2003")
-            res.status(404).json(err).end();
-        else
-            res.status(400).json(err).end();
+
+    let veiculo = await prisma.Frota.findUnique({
+        where: {
+            id: req.body.frotaId
+        },
+        select: {
+            status: true
+        }
+    })
+
+    let motorista = await prisma.Motorista.findUnique({
+        where: {
+            id: req.body.motoristaId
+        },
+        select: {
+            status: true
+        }
+    })
+
+    if (veiculo.status || motorista.status == false) {
+        res.status(404).json({ "response": "veiculo ou motorista ocupado" }).end();
+    } else {
+        try {
+            let servicos = await prisma.Servico.create({
+                data: req.body,
+                select: {
+                    Frota: true
+                },
+                select: {
+                    Motorista: true
+                }
+            });
+
+            Motorista.updateIndisponivel(req.body.motoristaId)
+            Frota.updateIndisponivel(req.body.frotaId)
+
+            res.status(200).json(servicos).end();
+        } catch (err) {
+            if (err.code == "P2003")
+                res.status(404).json(err).end();
+            else
+                res.status(400).json(err).end();
+        }
     }
 }
 
@@ -28,7 +63,8 @@ const read = async (req, res) => {
                 select: {
                     marca: true,
                     modelo: true,
-                    placa: true
+                    placa: true,
+                    status: true
                 }
             }
         }
@@ -49,6 +85,7 @@ const readId = async (req, res) => {
 }
 
 const update = async (req, res) => {
+
     try {
         let servicos = await prisma.Servico.update({
             data: {
@@ -56,9 +93,15 @@ const update = async (req, res) => {
                 descricao: req.body.descricao,
             },
             where: {
-                id: Number(req.body.motoristaId)
+                id: Number(req.body.id)
             }
         });
+
+        if (req.body.data_retorno != null) {
+            Frota.updateDisponivel(servicos.frotaId)
+            Motorista.updateDisponivel(servicos.motoristaId)
+        }
+
         res.status(200).json(servicos).end();
     } catch (error) {
         res.status(404).json(error).end();

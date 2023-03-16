@@ -16,6 +16,51 @@ const create = async (req, res) => {
     }
 }
 
+const updateDisponivel = async (id) => {
+
+    let motorista = await prisma.Motorista.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true,
+            status: true
+        }
+    })
+
+    let motoristaUpdate = await prisma.Motorista.update({
+        where: {
+            id: motorista.id
+        },
+        data: {
+            status: true
+        }
+    })
+
+}
+
+const updateIndisponivel = async (id) => {
+    let motorista = await prisma.Motorista.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true,
+            status: true
+        }
+    })
+
+    let motoristaUpdate = await prisma.Motorista.update({
+        where: {
+            id: motorista.id
+        },
+        data: {
+            status: false
+        }
+    })
+
+}
+
 const read = async (req, res) => {
     let motorista = await prisma.Motorista.findMany();
 
@@ -38,7 +83,7 @@ const update = async (req, res) => {
             data: {
                 cpf: req.body.email,
                 cnh: req.body.senha,
-                nome: req.body.nome,
+                nome: req.body.nome
             },
             where: {
                 id: Number(req.params.id)
@@ -68,5 +113,7 @@ module.exports = {
     read,
     readId,
     update,
-    del
+    del,
+    updateDisponivel,
+    updateIndisponivel
 }

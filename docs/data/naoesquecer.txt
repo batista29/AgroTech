@@ -1,0 +1,8 @@
+--BACKEND--
+
+true = disponivel
+
+false = indisponivel
+
+carro no serviço pode ser mandado para manutenção, mas carro em manutenção
+não pode ser mandado para serviço enquanto o status dele for false
