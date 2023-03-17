@@ -24,7 +24,7 @@ const create = async (req, res) => {
         }
     })
 
-    if (veiculo.status || motorista.status == false) {
+    if (veiculo.status && motorista.status === false) {
         res.status(404).json({ "response": "veiculo ou motorista ocupado" }).end();
     } else {
         try {

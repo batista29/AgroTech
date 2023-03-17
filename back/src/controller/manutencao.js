@@ -10,9 +10,12 @@ const create = async (req, res) => {
             id: req.body.frotaId
         },
         select: {
+            id: true,
             status: true
         }
     })
+
+    console.log(veiculo)
 
     if (veiculo.status == false) {
         res.status(404).json({ "response": "veiculo ocupado" }).end();
@@ -25,7 +28,7 @@ const create = async (req, res) => {
                 }
             });
 
-            Frota.updateIndisponivel(manutencao.frotaId)
+            Frota.updateIndisponivel(veiculo.id)
 
             res.status(200).json(manutencao).end();
         } catch (err) {
@@ -45,6 +48,7 @@ const read = async (req, res) => {
             valor: true,
             data_inicio: true,
             data_fim: true,
+            frotaId: true,
             Frota: {
                 select: {
                     marca: true,

@@ -24,16 +24,16 @@ export default function Login({ navigation }) {
             }
         )
             .then(res => {
-                if (res.status == 200) {
-                    console.log(res)
-                    navigation.navigate("Home")
-                } else {
-                    console.log(res)
-                    alert('Erro')
-                }
+                return res.json()
+
             })
             .then(data => {
-                return console.log(data)
+                if (data.result.email !== undefined) {
+                    AsyncStorage.setItem('token', data.result.token)
+                    navigation.navigate("Home")
+                } else {
+                    alert('Erro')
+                }
             })
     }
 

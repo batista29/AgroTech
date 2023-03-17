@@ -39,10 +39,11 @@ const updateDisponivel = async (id) => {
 
 }
 
-const updateIndisponivel = async (id) => {
+const updateIndisponivel = async (frotaId) => {
+
     let frotas = await prisma.Frota.findUnique({
         where: {
-            id: id
+            id: frotaId
         },
         select: {
             id: true,
@@ -58,11 +59,21 @@ const updateIndisponivel = async (id) => {
             status: false
         }
     })
-
+    console.log(frotasUpdate)
 }
 
 const read = async (req, res) => {
-    let frotas = await prisma.Frota.findMany();
+    let frotas = await prisma.Frota.findMany({
+        select: {
+            id: true,
+            marca: true,
+            modelo: true,
+            placa: true,
+            status: true,
+            servicos: true,
+            manutencoes: true,
+        }
+    });
 
     res.status(200).json(frotas).end();
 }
